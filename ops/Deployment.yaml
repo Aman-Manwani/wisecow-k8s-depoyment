@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wisecow-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wisecow
+  template:
+    metadata:
+      labels:
+        app: wisecow
+    spec:
+      containers:
+      - name: wisecow
+        image: amanmanwani/accuknox:v1
+        securityContext:
+          allowPrivilegeEscalation: false
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
+        ports:
+        - containerPort: 4499
+        imagePullPolicy: Always
